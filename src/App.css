@@ -1,0 +1,513 @@
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Make sure canvas stays behind other elements */
+}
+/* Custom animation for rotating the text around the spinner */
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.secondpage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  /* height: 40vmin; */
+  pointer-events: none;
+  animation: spin 5s linear infinite;
+}
+
+.rotating-text {
+  animation: rotateText 4s linear infinite;
+  transform-origin: 50% 150px; /* This controls the radius of the rotation */
+}
+
+/* Tailwind Config */
+.animate-spin-slow {
+  animation: spin 10s linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  /* background-color: #282c34; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Curtain animation */
+/* Gradient definitions for curtains */
+#curtain-animation {
+  background: white;
+}
+
+#curtain-animation defs {
+  display: none;
+}
+
+#curtain-animation rect {
+  transition: transform 1.5s ease-in-out;
+}
+
+/* Left curtain gradient */
+svg defs {
+  display: block;
+}
+
+svg defs .left-gradient {
+  stop-color: #6b46c1; /* Purple */
+}
+
+svg defs .right-gradient {
+  stop-color: #3182ce; /* Blue */
+}
+
+
+.curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(135deg, #6b46c1, #3182ce); /* Gradient for curtains */
+  transition: transform 2s ease-in-out;
+}
+
+.left-curtain {
+  left: 0;
+  transform: translateX(0); /* Initial position for left curtain */
+  transform-origin: right center;
+  transition: 2s linear;
+  background-image: url("../public/left.jpg");
+  background-size: cover; /* Make sure the image covers the entire curtain */
+  background-position: left center; /* Position the image properly for the left curtain */
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 100vh;
+  padding: 3px;
+}
+
+.right-curtain {
+  right: 0;
+  transform: translateX(0); /* Initial position for right curtain */
+  transform-origin: left center;
+  transition: 2s linear;
+  background-image: url("../public/right.jpg");
+  background-size: cover; /* Make sure the image covers the entire curtain */
+  background-position: right center; /* Position the image properly for the right curtain */
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 100vh;
+  padding: 3px;
+}
+
+/* Start Button */
+.start-btn {
+  position: absolute;
+  z-index: 10; /* Keep the button above the curtains */
+}
+
+/* Main Content (hidden initially) */
+.main-content {
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+.css-3d-text {
+  font-size: 70px;
+  color: #240c70;
+  font-family: "Arial Black", Gadget, sans-serif;
+ font-weight: bold;
+  text-shadow: 0px 0px 0 rgb(20,-4,96),
+               1px 1px 0 rgb(4,-20,80),
+               2px 2px 0 rgb(-12,-36,64),
+               3px 3px 0 rgb(-28,-52,48),
+               4px 4px 0 rgb(-44,-68,32),
+               5px 5px 0 rgb(-60,-84,16),
+               6px 6px 0 rgb(-76,-100,0),
+               7px 7px 0 rgb(-92,-116,0),
+               8px 8px 0 rgb(-108,-132,0),
+               9px 9px 0 rgb(-124,-148,0),
+               10px 10px  0 rgb(-140,-164,0),
+               11px 11px 10px rgba(232,5,5,0.29),
+               11px 11px 1px rgba(232,5,5,0.5),
+               0px 0px 10px rgba(232,5,5,.2);
+}
+
+
+
+
+
+
+
+
+
+
+/* chevron section */
+.correctchevron {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color: #0a8f08;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+.wrongchevron {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color: #e40e11;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+
+.correctchevron::before,
+.correctchevron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #0a8f08;
+}
+
+.wrongchevron::before,
+.wrongchevron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #e40e11;
+}
+
+.chevron-container {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color: #3498db;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+
+.winchevron {
+  position: relative;
+  width: 37.5%;
+  height: 50px;
+  background-color: #bba0ff;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+.para {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color:  #34db58;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+.mainpara {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color:  #d1f11a;
+  color: rgb(243, 17, 17);
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+.wining {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color:  #e100fffe;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+
+/* Chevron shapes */
+.chevron-container::before,
+.chevron-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #3498db;
+}
+
+
+.winchevron::before,
+.winchevron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color:#bba0ff;
+}
+
+.a::before{
+  content: "A.";
+
+}
+.b::before{
+  content: "B.";
+
+}
+.c::before{
+  content: "C.";
+
+}
+.d::before{
+  content: "D.";
+
+}
+.para::before,
+.para::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #34db58;
+}
+
+.mainpara::before,
+.mainpara::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #d1f11a;
+}
+
+.wining::before,
+.wining::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #e100fffe;
+}
+/* Left Chevron */
+.chevron-container::before {
+  left: -30px;
+  clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+}
+
+/* Right Chevron */
+.chevron-container::after {
+  right: -29.8px;
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 50%, 0% 0%);
+}
+
+/* Add lines extending to the container border */
+.line-left,
+.line-right {
+  position: absolute;
+  top: 23px;
+  width: 100px;
+  height: 3px;
+  background-color: #3498db;
+  z-index: 0;
+}
+
+.para>.line-left,
+.para>.line-right {
+  position: absolute;
+  top: 23px;
+  width: 100px;
+  height: 3px;
+  background-color: #34db58;
+  z-index: 0;
+}
+
+.mainpara>.line-left,
+.mainpara>.line-right {
+  position: absolute;
+  top: 23px;
+  width: 100px;
+  height: 3px;
+  background-color: #d1f11a;
+  z-index: 0;
+}
+
+/* Left line extending from the left chevron to the container border */
+.line-left {
+  left: -130px; /* Positioned to connect to container's left border */
+}
+
+/* Right line extending from the right chevron to the container border */
+.line-right {
+  right: -130px; /* Positioned to connect to container's right border */
+}
+
+
+
+.correctchevron {
+  position: relative;
+  width: "37.5%";
+  height: 50px;
+  background-color: #0a8f08;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+.wrongchevron {
+  position: relative;
+  width: "37.5%";
+  height: 50px;
+  background-color: #e40e11;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+
+.correctchevron::before,
+.correctchevron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #0a8f08;
+}
+
+.wrongchevron::before,
+.wrongchevron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #e40e11;
+}
+
+
+.slidechevron {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color: #b734db;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+.slidechevron::before,
+.slidechevron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  background-color: #b734db;
+}
