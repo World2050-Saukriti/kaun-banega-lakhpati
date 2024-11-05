@@ -4,14 +4,15 @@ import Winning from "./components/Winning";
 import SemiCircleTimer from "./components/Timer";
 import LifelineButtons from "./components/Lifeline";
 import { useState, useEffect, useContext } from "react";
-import { DataContext } from "./context";
+import { DataContext,timerContext } from "./context";
 import VisionariesProfileCards from "./components/Profile";
 export default function BG() {
   const [cash, setCash] = useState(false);
   const [qsn, setQsn] = useState(false);
-  const [start, setStart] = useState(false);
+  // const [start, setStart] = useState(false);
   //const [questionIndex, setQuestionIndex] = useState(0); // State to track current question index
   const { jsonData } = useContext(DataContext);
+  const {timeOn,setTimeOn} = useContext(timerContext);
   // const {qnum,setQnum} = useContext(qsnContext)
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -22,7 +23,7 @@ export default function BG() {
         setQsn((prevQsn) => !prevQsn);
       }
       if (e.key === "X" && e.shiftKey) {
-        setStart((prevStart) => !prevStart); // Toggle timer state
+        setTimeOn((prevStart) => !prevStart); // Toggle timer state
       }
     };
 
@@ -56,7 +57,7 @@ export default function BG() {
       {cash && <Winning />}
       {cash && <Cash />}
       {qsn && <Qsn/>} {/* Pass current question index */}
-      {start && <SemiCircleTimer />}
+      {timeOn && <SemiCircleTimer />}
       {qsn && <LifelineButtons />}
     </div>
   );

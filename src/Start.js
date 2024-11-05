@@ -2,7 +2,7 @@ import { useEffect,useState } from 'react';
 import logo from './logo.svg'; // Replace with your spinner image
 import './App.css'; // Custom styles for animation, etc.
 import BG from './bg';
-
+import startsound from "../src/startsound.mp3"
 function Comp1(){
   return(
     <div className="relative w-100 h-screen">
@@ -50,7 +50,7 @@ function Start() {
 const [bg,setbg] = useState(false);
   useEffect(() => {
     // Play audio
-    const audio = new Audio('/audio.mp3');
+    const audio = new Audio(startsound);
     audio.play();
     audio.onended = () => {
       setbg(true); 

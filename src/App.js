@@ -3,12 +3,14 @@ import * as XLSX from 'xlsx';
 import * as d3 from 'd3';
 import './App.css';
 import Start from './Start';
-import { DataContext,qsnContext,winContext } from './context';
+import { DataContext,qsnContext,winContext,timerContext,timeAudioContext } from './context';
 function App() {
   const [showCurtain, setShowCurtain] = useState(false);
 const [jsonData, setJsonData] = useState([]);
 const [qnum,setQnum] = useState([]);
 const [amount,setAmount] = useState(0);
+const [timeOn,setTimeOn] = useState(false);
+const [timeAudio,setTimeAudio] = useState(true);
 const lc = useRef();
 let rc = useRef();
   const handleStart = () => {
@@ -78,6 +80,8 @@ setTimeout(() => {
     <winContext.Provider value={{amount,setAmount}}>
     <DataContext.Provider value={{jsonData,setJsonData}}>
     <qsnContext.Provider value={{qnum,setQnum}}>
+    <timerContext.Provider value={{timeOn,setTimeOn}}>
+    <timeAudioContext.Provider value={{timeAudio,setTimeAudio}}>
     <div className="App relative w-full h-screen flex items-center justify-center bg-white overflow-hidden">
       {/* Curtains */}
       {!showCurtain && (
@@ -106,6 +110,8 @@ setTimeout(() => {
         </div>
       )}
     </div>
+    </timeAudioContext.Provider>
+    </timerContext.Provider>
     </qsnContext.Provider>
     </DataContext.Provider>
     </winContext.Provider>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect,useContext } from 'react';
+import timesound from "../timesound.mp3"
 const SemiCircleTimer = () => {
   const [timeLeft, setTimeLeft] = useState(30);
   const [isActive, setIsActive] = useState(false);
@@ -13,7 +13,7 @@ const SemiCircleTimer = () => {
   useEffect(() => {
     // Create the audio element when the timer starts
     if (!audio) {
-      const audioElement = new Audio('/chak.mp3');
+      const audioElement = new Audio(timesound);
       setAudio(audioElement);
     }
 
@@ -28,6 +28,7 @@ const SemiCircleTimer = () => {
           if (prev === 1 && audio) {
             audio.pause(); // Pause the audio when time is about to end
             audio.currentTime = 0; // Reset the audio
+            clearInterval(timerId)
           }
           return prev - 1; // Update the timer countdown
         });
@@ -49,7 +50,10 @@ const SemiCircleTimer = () => {
     }
 
     startTimer(); // Ensure the timer starts
-  }, [isActive, timeLeft, chak, audio]); // Add 'audio' to the dependency array
+    return ()=>{
+      audio?.release();
+    }
+  }, [isActive, chak, audio]); // Add 'audio' to the dependency array
 
   const percentage = (timeLeft / 10) * 100;
 
